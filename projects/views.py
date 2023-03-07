@@ -9,3 +9,5 @@ def list_projects(request):
         "projects": projects
     }
     return render(request, "projects/list.html", context)
+
+
