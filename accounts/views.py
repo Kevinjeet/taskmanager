@@ -3,6 +3,7 @@ from accounts.form import AccountsForm, SignUpForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
+
 def user_login(request):
     if request.method == "POST":
         form = AccountsForm(request.POST)
@@ -15,15 +16,14 @@ def user_login(request):
                 return redirect("list_projects")
     else:
         form = AccountsForm()
-    context = {
-        "form": form
-    }
+    context = {"form": form}
     return render(request, "accounts/login.html", context)
 
 
 def user_logout(request):
     logout(request)
     return redirect("login")
+
 
 def user_signup(request):
     if request.method == "POST":

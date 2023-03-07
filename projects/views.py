@@ -1,17 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from projects.models import Project
 from django.contrib.auth.decorators import login_required
-from tasks.models import Task
 from projects.forms import ProjectForm
-from django.contrib.auth.models import User
+
+
 
 @login_required
 def list_projects(request):
     projects = Project.objects.filter(owner=request.user)
-    context = {
-        "projects": projects
-    }
+    context = {"projects": projects}
     return render(request, "projects/list.html", context)
+
 
 @login_required
 def show_project(request, id):
@@ -19,9 +18,9 @@ def show_project(request, id):
 
     context = {
         "projects": projects,
-
     }
     return render(request, "projects/detail.html", context)
+
 
 @login_required
 def create_project(request):
@@ -32,7 +31,5 @@ def create_project(request):
             return redirect("list_projects")
     else:
         form = ProjectForm()
-    context = {
-        "form": form
-        }
+    context = {"form": form}
     return render(request, "projects/create.html", context)
